@@ -1,0 +1,106 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+* {
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  background: #f7f3f0;
+  color: #222221;
+  font-family: "Open Sans", sans-serif;
+  text-align: center;
+}
+
+h3 {
+  text-align: left;
+}
+
+.container {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  -moz-flex-flow: row wrap;
+  -ms-flex-flow: row wrap;
+  flex-flow: row wrap;
+  -webkit-justify-content: space-around;
+  -moz-justify-content: space-around;
+  -ms-justify-content: space-around;
+  justify-content: space-around;
+  -webkit-align-items: stretch;
+  -moz-align-items: stretch;
+  -ms-align-items: stretch;
+  align-items: stretch;
+  width: 100%;
+  height: auto;
+}
+
+.box {
+  margin: 0 1em;
+  padding: 0.5em;
+  position: relative;
+}
+
+.size1 {
+  -webkit-flex: 1 100%;
+  -moz-flex: 1 100%;
+  -ms-flex: 1 100%;
+  flex: 1 100%;
+}
+
+.color1 {
+  background: #f7f3f0;
+}
+
+.color2 {
+  background: #e9e8e4;
+}
+
+.color3 {
+  background: #dadada;
+}
+
+#container {
+  width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+#svg-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-bottom: 50%;
+}
+
+#svg-content-responsive {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.tooltip {
+  position: absolute;
+  text-align: center;
+  padding: 0.5em 1em;
+  background: #E3DDAF;
+  border-radius: 8px;
+  pointer-events: none;
+  max-width: 210px;
+}
+
+circle {
+  fill: #21AD94;
+  cursor: pointer;
+}
+
+.subunit {
+  fill: #10102B;
+  stroke: #1A4969;
+  stroke-width: 0.4;
+}
