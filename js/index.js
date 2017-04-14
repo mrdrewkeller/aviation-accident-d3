@@ -23,7 +23,7 @@ var svg =
   .attr("preserveAspectRatio", "xMinYMin meet")
   .attr("viewBox", "0 0 " + width + " " + height)
   .attr("id", "svg-content-responsive")
-  .call(d3.behavior.zoom().on("zoom", function () {
+  .call(d3.zoom().on("zoom", function () {
     svg.attr("transform", "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")");
   }))
   .append("g");
@@ -36,9 +36,9 @@ var tooltip =
   .style("opacity", 0);
 
 // Define projection
-var projection = d3.geo.mercator().translate([width / 2, height / 2.6]);
+var projection = d3.geoMercator().translate([width / 2, height / 2.6]);
 // Define path generator
-var path = d3.geo.path().projection(projection);
+var path = d3.geoPath().projection(projection);
 
 // Get data and render map with callback
 d3.json("https://raw.githubusercontent.com/moigithub/d3maplayout/master/world-50m.json", function (error, data) {
@@ -113,7 +113,7 @@ d3.json("https://raw.githubusercontent.com/moigithub/d3maplayout/master/world-50
   });
 
   var zoom =
-    d3.behavior.zoom()
+    d3.zoom()
     .translate(projection.translate())
     .scale(projection.scale())
     .scaleExtent([height, 8 * height])
