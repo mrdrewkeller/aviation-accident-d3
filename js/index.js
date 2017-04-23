@@ -25,6 +25,7 @@ function filter() {
   }
 
   plotPoints(filteredData);
+  drawPie();
 
 }
 
@@ -152,7 +153,7 @@ function drawMap() {
   // This allows the svg to use preserveAspectRatio
   // and viewBox to make the svg responsive
   svg =
-    d3.select("span")
+    d3.select("#map")
     .append("div")
     .attr("id", "container")
     .append("div")
@@ -221,6 +222,7 @@ function drawMap() {
 }
 
 function plotPoints(data) {
+  //console.log(data);
   //console.log(data.length);
   document.getElementById("foldable").innerHTML = data.length.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " incidents";
   // Bind data to circles
@@ -273,4 +275,65 @@ function plotPoints(data) {
       });
       tooltip.transition().duration(200).style("opacity", 0);
     });
+}
+
+function drawPie() {
+
+  var str = '{"label":"Fatal","value":0},{"label":"Non-Fatal","value":0}';
+  var data = JSON.parse('[' + str + ']');
+  var lookup = {};
+  result = [];
+  for (var item, i = 0; item = window.allData[i++];) {
+    var injurySeverity = item.injuryseverity.split('(')[0];
+    if (injurySeverity == "Fatal") {
+      data[0].value++;
+    } else if (injurySeverity == "Non-Fatal") {
+      data[1].value++;
+    }
+  }
+  console.log(data);
+
+  var width = 250,
+    height = 250,
+    radius = 100
+  colors = d3.scale.ordinal()
+    .range(['#3A4853', '#567897']);
+
+  var pie = d3.layout.pie()
+    .value(function (d) {
+      return d.value;
+    })
+
+  var arc = d3.svg.arc()
+    .outerRadius(radius)
+
+  var myChart = d3.select('#severity').append('svg')
+    .attr('width', width)
+    .attr('height', height)
+    .append('g')
+    .attr('transform', 'translate(' + (width - radius) + ',' + (height - radius) + ')')
+    .selectAll('path').data(pie(data))
+    .enter().append('g')
+    .attr('class', 'slice')
+
+  var slices = d3.selectAll('g.slice')
+    .append('path')
+    .attr('fill', function (d, i) {
+      return colors(i);
+    })
+    .attr('d', arc)
+    
+
+  var text = d3.selectAll('g.slice')
+    .append('text')
+    .text(function (d, i) {
+      return d.data.label + ' ' + (((d.endAngle - d.startAngle)/(2*Math.PI)*100).toFixed(0) + '%');
+    })
+    .attr('text-anchor', 'middle')
+    .attr('fill', 'white')
+    .attr('transform', function (d) {
+      d.innerRadius = 0;
+      d.outerRadius = radius;
+      return 'translate(' + arc.centroid(d) + ')'
+    })
 }
