@@ -39,24 +39,34 @@
           <h1><strong>Aviation Accident Statistics</strong></h1>
         </div>
         <div class="box size1 color1">
+          <div class="select-style">
           <select name="year" id="selectYear"></select>
+          <select name="carrier" id="selectCarrier">
+            <option value="Private">Private</option>
+          </select>
+          <select name="country" id="selectCountry">
+            <option value="US">United States</option>
+          </select>
+          <select name="category" id="selectCategory">
+            <option value="heli">Helicopter</option>
+          </select>
+          </div>
         </div>
         <div class="box size1 color1">
           <h2 class="foldable" id="foldable"></h2>
         </div>
+        <div class="box size3 color3">
+          <h3>Accident Severity</h3>
+          <span id="severity"></span>
+        </div>
+        <div class="box size3 color3">
+          <h3>Commercial vs. Amateur Flights</h3>
+          <span id="flightType"></span>
+        </div>
         <div class="box size1 color2 mapContainer">
 
-          <span class="map">
+          <span id="map">
         </span>
-        </div>
-        <div class="box size3 color3">
-          <h3>Donut Chart</h3>
-        </div>
-        <div class="box size3 color3">
-          <h3>Donut Chart</h3>
-        </div>
-        <div class="box size3 color3">
-          <h3>Donut Chart</h3>
         </div>
       </div>
 
