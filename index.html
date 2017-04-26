@@ -31,28 +31,45 @@
 
     <body>
       <div class="container">
-        <div class="box size1 color1">
+        <div class="box size100 color1">
           <h1><strong>Aviation Accident Statistics</strong></h1>
         </div>
-        <div class="box size1 color1">
+        <div class="box size100 color1">
           <div class="select-style">
-          <select name="year" id="selectYear"></select>
-          <select name="country" id="selectCountry"></select>
-          <select name="category" id="selectCategory"></select>
+            <select name="year" id="selectYear"></select>
+            <select name="country" id="selectCountry"></select>
+            <select name="category" id="selectCategory"></select>
           </div>
         </div>
-        <div class="box size1 color1">
+        <div class="box size100 color1">
           <h2 class="foldable" id="foldable"></h2>
         </div>
-        <div class="box size3 color3">
+        <div class="box size25 color2">
           <h3>Accident Severity</h3>
+          <p><span class="colorBox darkBlue"></span> Fatal</p>
+          <p><span class="colorBox lightBlue"></span> Non-Fatal</p>
           <span id="severity"></span>
         </div>
-        <div class="box size3 color3">
-          <h3>Commercial vs. Amateur Flights</h3>
+        <div class="box size25 color2">
+          <h3>Commercial vs. Private Flights</h3>
+          <p><span class="colorBox darkBlue"></span> Commercial</p>
+          <p><span class="colorBox lightBlue"></span> Private</p>
           <span id="flightType"></span>
         </div>
-        <div class="box size1 color2 mapContainer">
+        <div class="box size25 color2 graphContainer">
+          <h3>Accidents Per Month</h3>
+          <svg id="accidentsPerMonth" width="500" height="400"></svg>
+        </div>
+        <div class="box size25 color3 graphContainer">
+          <h3>Phase Of Flight</h3>
+          <svg id="phaseOfFlight" width="500" height="400"></svg>
+        </div>
+        <div class="box size25 color3 graphContainer">
+          <h3>Purpose Of Flight</h3>
+          <svg id="purposeOfFlight" width="500" height="400"></svg>
+        </div>
+        <div class="box size100 color2 mapContainer">
+          <h3>Accident Locations</h3>
           <p id="mapInfo"></p>
           <span id="map">
         </span>
