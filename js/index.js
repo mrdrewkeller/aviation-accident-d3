@@ -1,6 +1,6 @@
 var width = 840;
 var height = 620;
-var url = 'http://174.138.68.14:3000/accidents';
+var url = 'https://aviationaccident.info/accidents';
 var selectYear = document.getElementById("selectYear");
 var allData;
 
