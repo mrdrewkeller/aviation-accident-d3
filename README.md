@@ -6,7 +6,7 @@ The original dataset is available from the NTSB's website in XML format - https:
 
 As part of this project, a JSON API has been created with Postgres and PostGrest and is publicly available to use. 
 
-All API access is over HTTP, and accessed from the http://aviationaccident.info:3000/accidents. All data is sent and 
+All API access is over HTTP, and accessed from the https://aviationaccident.info/accidents. All data is sent and 
 received as JSON.
 
 ### Schema
