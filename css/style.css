@@ -24,6 +24,20 @@ a {
   color: #567897;
 }
 
+.darkBlue {
+    background-color: #3A4853;
+}
+
+.lightBlue {
+  background-color: #567897;
+}
+
+.colorBox {
+  height: 1em;
+  width: 1em;
+  display: inline-block;
+}
+
 #severity {
   margin: 0 auto;
   top: 0;
@@ -60,25 +74,46 @@ a {
   position: relative;
 }
 
-.size1 {
+.size100 {
   -webkit-flex: 1 100%;
   -moz-flex: 1 100%;
   -ms-flex: 1 100%;
   flex: 1 100%;
 }
 
-.size2 {
+.size75 {
+  -webkit-flex: 1 75%;
+  -moz-flex: 1 75%;
+  -ms-flex: 1 75%;
+  flex: 1 75%;
+}
+
+.size66 {
+  -webkit-flex: 1 66%;
+  -moz-flex: 1 66%;
+  -ms-flex: 1 66%;
+  flex: 1 66%;
+}
+
+.size50 {
   -webkit-flex: 1 50%;
   -moz-flex: 1 50%;
   -ms-flex: 1 50%;
   flex: 1 50%;
 }
 
-.size3 {
+.size33 {
   -webkit-flex: 1 33%;
   -moz-flex: 1 33%;
   -ms-flex: 1 33%;
   flex: 1 33%;
+}
+
+.size25 {
+  -webkit-flex: 1 25%;
+  -moz-flex: 1 25%;
+  -ms-flex: 1 25%;
+  flex: 1 25%;
 }
 
 .color1 {
@@ -167,3 +202,27 @@ select {
   color: #567897;
   margin: .5em;
 }
+
+
+.axis path, .axis line
+{
+  fill: none;
+  stroke: #567897;
+  shape-rendering: crispEdges;
+}
+
+.axis text
+{
+  fill: #567897;
+}
+
+.tick
+{
+  stroke-width: 0;
+}
+.bar
+{
+  fill: #567897;
+  opacity: 0.5;
+}
+        
