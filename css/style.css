@@ -20,6 +20,10 @@ h1 {
   font-size: 4em;
 }
 
+a {
+  color: #567897;
+}
+
 #severity {
   margin: 0 auto;
   top: 0;
