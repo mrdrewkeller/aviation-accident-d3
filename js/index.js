@@ -290,7 +290,7 @@ function plotPoints(data) {
 
 
   // Render the circles
-  points.append("circle").attr("r", 1.5).attr("cx", function (d) {
+  points.append("circle").attr("r", 1.0).attr("cx", function (d) {
       var coords = [d.longitude, d.latitude];
       if (coords) {
         return projection(coords)[0];
