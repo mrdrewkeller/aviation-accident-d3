@@ -249,7 +249,7 @@ function drawMap() {
   path = d3.geo.path().projection(projection);
 
   // Get data and render map with callback
-  d3.json("https://raw.githubusercontent.com/moigithub/d3maplayout/master/world-50m.json", function (error, data) {
+  d3.json("js/world-50m.json", function (error, data) {
     if (error) return console.log("error retrieving json");
 
     // Get feature collection of world map
