@@ -2,13 +2,23 @@ var width = 840;
 var height = 620;
 var url = 'https://aviationaccident.info/accidents';
 var selectYear = document.getElementById("selectYear");
+var selectCountry = document.getElementById("selectCountry");
+var selectCategory = document.getElementById("selectCategory");
+var mapInfo = document.getElementById("mapInfo");
 var allData;
 
 window.onload = function () {
   drawMap();
+  
 }
 
 selectYear.onchange = function () {
+  filter();
+}
+selectCountry.onchange = function () {
+  filter();
+}
+selectCategory.onchange = function () {
   filter();
 }
 
@@ -19,13 +29,17 @@ function filter() {
   svg.selectAll("g").remove();
 
   for (i = 0; i < window.allData.length; i++) {
-    if (window.allData[i].eventdate.startsWith(selectYear.value)) {
+    if (
+      window.allData[i].eventdate.startsWith(selectYear.value)
+      && window.allData[i].country == selectCountry.value
+      && window.allData[i].aircraftcategory == selectCategory.value
+      ) {
       filteredData.push(window.allData[i]);
     }
   }
 
   plotPoints(filteredData);
-  drawPie();
+  drawPie(filteredData);
 
 }
 
@@ -48,6 +62,50 @@ function getYears() {
     el.textContent = opt;
     el.value = opt;
     selectYear.appendChild(el);
+  }
+}
+
+function getCountry() {
+  var lookup = {};
+  result = [];
+
+  for (var item, i = 0; item = window.allData[i++];) {
+    var country = item.country;
+
+    if (!(country in lookup)) {
+      lookup[country] = 1;
+      result.push(country);
+    }
+  }
+
+  for (var i = 0; i < result.length; i++) {
+    var opt = result[i];
+    var el = document.createElement("option");
+    el.textContent = opt;
+    el.value = opt;
+    selectCountry.appendChild(el);
+  }
+}
+
+function getCategory() {
+  var lookup = {};
+  result = [];
+
+  for (var item, i = 0; item = window.allData[i++];) {
+    var category = item.aircraftcategory;
+
+    if (!(category in lookup)) {
+      lookup[category] = 1;
+      result.push(category);
+    }
+  }
+
+  for (var i = 0; i < result.length; i++) {
+    var opt = result[i];
+    var el = document.createElement("option");
+    el.textContent = opt;
+    el.value = opt;
+    selectCategory.appendChild(el);
   }
 }
 
@@ -139,6 +197,8 @@ getJSON({
   //plotPoints(data);
   allData = data;
   getYears();
+  getCountry();
+  getCategory();
   filter();
   //onComplete(data);
 }, function (error) { // on reject
@@ -230,7 +290,7 @@ function plotPoints(data) {
 
 
   // Render the circles
-  points.append("circle").attr("r", .7).attr("cx", function (d) {
+  points.append("circle").attr("r", 1.5).attr("cx", function (d) {
       var coords = [d.longitude, d.latitude];
       if (coords) {
         return projection(coords)[0];
@@ -251,19 +311,6 @@ function plotPoints(data) {
         return d.radius * 4;
       });
       d3.select(this).style("opacity", 1);
-      var data = d;
-      // Convert time data to year
-      //var year = yearFormat(new Date(data.year));
-      tooltip.transition().duration(200).style("opacity", 1);
-      // Add text to .tooltip
-      tooltip.html("<h2 class='title'>" + data.location + "</h2>" + "<h3>" + data.country + "</h3>" + data.accidentnumber + "<br />");
-      // Check if tooltip is too close to right side of page, remove by toolwidth length if it is
-      if (d3.event.pageX + 260 > window.innerWidth) {
-        tooltip.style("left", d3.event.pageX - tooltip.style("width").replace(/[px]/g, '') + "px");
-      } else {
-        tooltip.style("left", d3.event.pageX + "px");
-      }
-      tooltip.style("top", d3.event.pageY - 18 + "px");
     })
     // Remove info and flag on mouseout
     .on("mouseout", function () {
@@ -273,7 +320,11 @@ function plotPoints(data) {
       d3.select(this).style("opacity", function (d) {
         return d.opacity;
       });
-      tooltip.transition().duration(200).style("opacity", 0);
+    })
+    .on("click", function (d) {
+      var data = d;
+      var date = data.eventdate.split("T");
+      mapInfo.innerHTML = "<strong>Location: </strong>" +  data.location + " | <strong>Date: </strong>" +  date[0]  + " | <strong>Carrier: </strong>" + data.aircarrier + " | <strong>Total Injuries: </strong>" + (data.totalfatalinjuries+data.totalminorinjuries+data.totalseriousinjuries) + " | <strong>Amateur Built: </strong>" + data.amateurbuilt + " | <strong><a target='_blank' href='https://www.ntsb.gov/_layouts/ntsb.aviation/brief.aspx?ev_id=" + data.eventid + "&key=1'>NTSB Synopsis</a></strong>";
     });
 }
 
@@ -291,7 +342,7 @@ function drawPie() {
       data[1].value++;
     }
   }
-  console.log(data);
+  //console.log(data);
 
   var width = 250,
     height = 250,
